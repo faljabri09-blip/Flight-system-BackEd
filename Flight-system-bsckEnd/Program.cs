@@ -107,7 +107,7 @@ namespace Flight_system_bsckEnd
 
         public static void viewAllFlights(List<Flight> flights)
         {
-            if(flights.Count == 0)
+            if (flights.Count == 0)
             {
                 Console.WriteLine("Flight not found");
                 return;
@@ -292,7 +292,7 @@ namespace Flight_system_bsckEnd
             {
                 Console.WriteLine("Booking is already cancelled");
                 return;
-            } 
+            }
 
             booked.bookingStatus = "Cancelled";
 
@@ -371,7 +371,7 @@ namespace Flight_system_bsckEnd
             cancelFlight.status = "Cancelled";
 
             //cancelled every confirmed booking for the flight
-            List<Booking> bookingsCancelled = context.bookings.Where(b => b.flightId == flightId 
+            List<Booking> bookingsCancelled = context.bookings.Where(b => b.flightId == flightId
                                                                          && b.bookingStatus == "Confirmed").ToList();
 
 
@@ -389,7 +389,7 @@ namespace Flight_system_bsckEnd
 
             // Display the number of bookings that were Affected
             Console.WriteLine($"Affected booking : {bookingsCancelled.Count}");
-            
+
 
             // Display a message confirming that all cancelled seats are now available again
             Console.WriteLine("All cancle seats are available againe");
@@ -429,7 +429,7 @@ namespace Flight_system_bsckEnd
             //check if the passenger has any booking history
             if (passengerBooking.Count == 0)
             {
-                 Console.WriteLine("No booking history found for this passenger");
+                Console.WriteLine("No booking history found for this passenger");
                 return;
             }
 
@@ -466,86 +466,149 @@ namespace Flight_system_bsckEnd
 
         }
 
-            static void Main(string[] args)
+        public static void FlightRevenueAndLoadFactorReport(FlightContext context)
         {
-            bool exit = false;
-            while (exit == false) 
+
+            //search for all flights and order by descending.
+            var flights = context.flights.OrderByDescending(f => context.bookings
+                                                  .Where(b => b.flightId == b.flightId && b.bookingStatus == "Confirmed")
+                                                  .Sum(b => b.totalPrice));
+
+            //search for each flight and calculate the total confirmed bookings, total revenue, and load factor
+            foreach (Flight flight in context.flights)
             {
 
-                Console.WriteLine("Welcome to the Flight System");
-                Console.WriteLine("1. Register a Passenger");
-                Console.WriteLine("2. Add an Aircraft");
-                Console.WriteLine("3. Register a Pilot");
-                Console.WriteLine("4. View All Flights");
-                Console.WriteLine("5. Schedule a Flight");
-                Console.WriteLine("6. Book a Flight");
-                Console.WriteLine("7. Cancel a Booking");
-                Console.WriteLine("8. Depart a Flight");
-                Console.WriteLine("9. Cancel a Flight");
-                Console.WriteLine("10. Passenger Booking History");
-                Console.WriteLine("Flight Revenue and Load Factor Report");
-                Console.WriteLine("12. Exit");
-                Console.WriteLine("Choose one option");
+                //search for all confirmed bookings for the flight
+                var Confirmedbooking = context.bookings.Where(b => b.flightId == flight.flightId
+                                                              && b.bookingStatus == "Confirmed")
+                                                       .ToList();
 
+                //calculate the total number of confirmed bookings for the flight
+                int totalBooking = Confirmedbooking.Count;
+
+                //calculate the total revenue generated from confirmed bookings for the flight
+                decimal totalRevenue = Confirmedbooking.Sum(b => b.totalPrice);
+
+
+                //search for the aircraft associated with the flight
+                var aircraft = context.aircrafts.FirstOrDefault(a => a.aircraftId == flight.aircraftId);
+
+                //calculate the load factor for the flight of total confirmed bookings to total seats of the aircraft
+                decimal percentageLoadFactor = 0;
+
+                if (aircraft != null)
+                {
+
+                    percentageLoadFactor = totalBooking / context.aircrafts.Sum(a => a.totalSeats) * 100;
+
+                }
+
+                //calculate the total grand revenue for all flights
+                decimal totalGrandRevenue = 0;
+
+                totalGrandRevenue += totalRevenue;
+
+
+                //print report for each flight including flight code, total revenue, route, total confirmed bookings, load factor, and grand revenue
+                Console.WriteLine($"flight Code: {flight.flightCode}");
+
+                Console.WriteLine($"Total Revenue : {totalRevenue}");
+
+                Console.WriteLine($"Route : {flight.origin} to {flight.destination}");
+
+                Console.WriteLine($"Total Confirmed booking : {totalBooking}");
+
+                Console.WriteLine($"Total Revenue : {totalRevenue}");
+
+                Console.WriteLine($"Total Load Factor : {percentageLoadFactor}");
+
+                Console.WriteLine($"Total Grand Revenue: {totalGrandRevenue}");
             }
+      }
 
-            int option = int.Parse(Console.ReadLine());
-
-            switch(option)
+            static void Main(string[] args)
             {
+                bool exit = false;
+                while (exit == false)
+                {
+
+                    Console.WriteLine("Welcome to the Flight System");
+                    Console.WriteLine("1. Register a Passenger");
+                    Console.WriteLine("2. Add an Aircraft");
+                    Console.WriteLine("3. Register a Pilot");
+                    Console.WriteLine("4. View All Flights");
+                    Console.WriteLine("5. Schedule a Flight");
+                    Console.WriteLine("6. Book a Flight");
+                    Console.WriteLine("7. Cancel a Booking");
+                    Console.WriteLine("8. Depart a Flight");
+                    Console.WriteLine("9. Cancel a Flight");
+                    Console.WriteLine("10. Passenger Booking History");
+                    Console.WriteLine("11. Flight Revenue and Load Factor Report");
+                    Console.WriteLine("12. Exit");
+                    Console.WriteLine("Choose one option");
+
+                }
+
+                int option = int.Parse(Console.ReadLine());
+
+                switch (option)
+                {
 
                     case 1:
-                    RegisterPassenger(context.passengers);
-                    break;
+                        RegisterPassenger(context.passengers);
+                        break;
 
                     case 2:
-                    AddAnAircraft(context.aircrafts);
-                    break;
+                        AddAnAircraft(context.aircrafts);
+                        break;
 
                     case 3:
-                    RegisterPilot(context.pilots);
-                    break;
+                        RegisterPilot(context.pilots);
+                        break;
 
                     case 4:
                         viewAllFlights(context.flights);
-                    break;
+                        break;
 
                     case 5:
                         ScheduleAFlight(context);
-                    break;
+                        break;
 
                     case 6:
                         BookAFlight(context);
-                    break;
+                        break;
 
                     case 7:
                         CancelBooking(context);
-                    break;
+                        break;
 
                     case 8:
                         DepartFlight(context.flights);
-                    break;
+                        break;
 
 
                     case 9:
                         CancelFlight(context.flights);
-                    break;
+                        break;
 
                     case 10:
                         PassengerBookingHistory(context);
-                    break;
+                        break;
 
+                    case 11:
+                        FlightRevenueAndLoadFactorReport(context);
+                        break;
 
-                case 12:
+                    case 12:
                         exit = true;
-                    break;
-
+                        break;
 
                     default:
-                    Console.WriteLine("Invalid option");
-                    break;
+                        Console.WriteLine("Invalid option");
+                        break;
 
+                }
             }
         }
     }
-}
+
