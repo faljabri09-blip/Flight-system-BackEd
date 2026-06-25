@@ -524,30 +524,34 @@ namespace Flight_system_bsckEnd
 
                 Console.WriteLine($"Total Grand Revenue: {totalGrandRevenue}");
             }
-      }
+        }
 
-            static void Main(string[] args)
+
+        static void Main(string[] args)
+        {
+
+            bool exit = false;
+            while (exit == false)
             {
-                bool exit = false;
-                while (exit == false)
-                {
 
-                    Console.WriteLine("Welcome to the Flight System");
-                    Console.WriteLine("1. Register a Passenger");
-                    Console.WriteLine("2. Add an Aircraft");
-                    Console.WriteLine("3. Register a Pilot");
-                    Console.WriteLine("4. View All Flights");
-                    Console.WriteLine("5. Schedule a Flight");
-                    Console.WriteLine("6. Book a Flight");
-                    Console.WriteLine("7. Cancel a Booking");
-                    Console.WriteLine("8. Depart a Flight");
-                    Console.WriteLine("9. Cancel a Flight");
-                    Console.WriteLine("10. Passenger Booking History");
-                    Console.WriteLine("11. Flight Revenue and Load Factor Report");
-                    Console.WriteLine("12. Exit");
-                    Console.WriteLine("Choose one option");
+                Console.WriteLine("Welcome to the Flight System");
+                Console.WriteLine("^--------------------------------------------^");
+                Console.WriteLine("1. Register a Passenger");
+                Console.WriteLine("2. Add an Aircraft");
+                Console.WriteLine("3. Register a Pilot");
+                Console.WriteLine("4. View All Flights");
+                Console.WriteLine("5. Schedule a Flight");
+                Console.WriteLine("6. Book a Flight");
+                Console.WriteLine("7. Cancel a Booking");
+                Console.WriteLine("8. Depart a Flight");
+                Console.WriteLine("9. Cancel a Flight");
+                Console.WriteLine("10. Passenger Booking History");
+                Console.WriteLine("11. Flight Revenue and Load Factor Report");
+                Console.WriteLine("12. Exit");
+                Console.WriteLine("^--------------------------------------------^");
+                Console.WriteLine("Choose one option :");
 
-                }
+
 
                 int option = int.Parse(Console.ReadLine());
 
@@ -611,4 +615,5 @@ namespace Flight_system_bsckEnd
             }
         }
     }
+}
 

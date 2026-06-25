@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fatma ALjabri\\Documents\\Back-end\\Flight-system-BackEd\\Flight-system-bsckEnd\\Flight-system-bsckEnd.csproj",
-      "projectName": "Flight-system-bsckEnd",
-      "projectPath": "C:\\Users\\Fatma ALjabri\\Documents\\Back-end\\Flight-system-BackEd\\Flight-system-bsckEnd\\Flight-system-bsckEnd.csproj",
+      "projectUniqueName": "C:\\Users\\Fatma ALjabri\\Documents\\Back-end\\Flight-system-BackEd\\Flight-system-bsckEnd\\Flight-system-backEnd.csproj",
+      "projectName": "Flight-system-backEnd",
+      "projectPath": "C:\\Users\\Fatma ALjabri\\Documents\\Back-end\\Flight-system-BackEd\\Flight-system-bsckEnd\\Flight-system-backEnd.csproj",
       "packagesPath": "C:\\Users\\Fatma ALjabri\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Fatma ALjabri\\Documents\\Back-end\\Flight-system-BackEd\\Flight-system-bsckEnd\\obj\\",
       "projectStyle": "PackageReference",
