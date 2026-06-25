@@ -1,4 +1,5 @@
 ﻿using Flight_system_bsckEnd.Models;
+using System.Numerics;
 
 namespace Flight_system_bsckEnd
 {
@@ -404,6 +405,67 @@ namespace Flight_system_bsckEnd
 
         }
 
+        public static void PassengerBookingHistory(FlightContext context)
+        {
+            //user input for passenger id to view booking history
+            Console.WriteLine("Enter passenger id to view booking history:");
+            int passengerId = int.Parse(Console.ReadLine());
+
+            //search for the passenger in the passengers list
+            Passenger passenger = context.passengers.FirstOrDefault(p => p.passengerId == passengerId);
+
+
+            //check if the passenger exists for view booking history
+            if (passenger == null)
+            {
+                Console.WriteLine("Passenger not found");
+                return;
+            }
+
+            //search for the bookings associated with the passenger ( booking class)
+            var passengerBooking = context.bookings.Where(b => b.passengerId == passengerId).ToList();
+
+
+            //check if the passenger has any booking history
+            if (passengerBooking.Count == 0)
+            {
+                 Console.WriteLine("No booking history found for this passenger");
+                return;
+            }
+
+
+            //search for the flight associated with each booking and display the booking history
+            foreach (Booking booking in context.bookings)
+            {
+
+                //search for the flight associated with the booking
+                Flight flight = context.flights.FirstOrDefault(f => f.flightId == booking.flightId);
+
+
+                //check if the flight exists before displaying the booking history
+                if (flight != null)
+                {
+                    Console.WriteLine($"Booking ID: {booking.bookingId}, Passenger: {passenger.passengerName}, Flight Code: {flight.flightCode}, " +
+                        $"Origin: {flight.origin}, Destination: {flight.destination},Depart Date: {flight.departureDate} ,Booking Status: {booking.bookingStatus} " +
+                        $"Number of seat : {booking.seatNumber}, Price paid : {booking.totalPrice}");
+                }
+
+                //calculate the total amount paid for confirmed bookings by the passenger
+                decimal totalAmount = 0;
+
+                //check if the booking status is "Confirmed" before adding the total amount
+                if (booking.bookingStatus == "Confirmed")
+                {
+                    totalAmount += booking.totalPrice; // totalAmount = totalAmount + booking.totalPrice;
+                }
+
+                //display the total amount paid for confirmed bookings by the passenger
+                Console.WriteLine($"Total Confirmed Amount : {totalAmount}");
+            }
+
+
+        }
+
             static void Main(string[] args)
         {
             bool exit = false;
@@ -420,6 +482,8 @@ namespace Flight_system_bsckEnd
                 Console.WriteLine("7. Cancel a Booking");
                 Console.WriteLine("8. Depart a Flight");
                 Console.WriteLine("9. Cancel a Flight");
+                Console.WriteLine("10. Passenger Booking History");
+                Console.WriteLine("Flight Revenue and Load Factor Report");
                 Console.WriteLine("12. Exit");
                 Console.WriteLine("Choose one option");
 
@@ -466,6 +530,11 @@ namespace Flight_system_bsckEnd
                     case 9:
                         CancelFlight(context.flights);
                     break;
+
+                    case 10:
+                        PassengerBookingHistory(context);
+                    break;
+
 
                 case 12:
                         exit = true;

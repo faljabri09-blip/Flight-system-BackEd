@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flight-system-bsckEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+515ddcbd95a5d43bb76ef5b7c6f32869873f2c54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9924ecdf5b9d99af615f48677a18319256433c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flight-system-bsckEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flight-system-bsckEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
