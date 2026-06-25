@@ -24,7 +24,22 @@ namespace Flight_system_bsckEnd.Models
         public string status { get; set; } // user input flight status (e.g., scheduled, delayed, cancelled)
 
 
-
+        public Flight(int flightId, string flightCode, int aircraftId, int pilotId, string origin, string destination, string departureDate, string departureTime, string arrivalTime, decimal ticketPrice, int availableSeats, int flightDuration, string status)
+        {
+            flightId = flightId;
+            flightCode = flightCode;
+            aircraftId = aircraftId;
+            pilotId = pilotId;
+            origin = origin;
+            destination = destination;
+            departureDate = departureDate;
+            departureTime = departureTime;
+            arrivalTime = arrivalTime;
+            ticketPrice = ticketPrice;
+            availableSeats = availableSeats;
+            FlightDuration = flightDuration;
+            status = status;
+        }
 
 
     }

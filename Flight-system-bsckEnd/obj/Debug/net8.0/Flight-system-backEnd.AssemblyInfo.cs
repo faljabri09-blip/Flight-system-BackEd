@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flight-system-backEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f13581d8035b79f92e26ac7a9b3305a8eefb6ba9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21217b19f743c3d51dd04da71879a9ed9043212b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flight-system-backEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flight-system-backEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

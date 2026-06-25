@@ -9,11 +9,24 @@ namespace Flight_system_bsckEnd
         public static FlightContext context = new FlightContext
         {
             aircrafts = new List<Aircraft>(),
-            flights = new List<Flight>(),
+            flights = new List<Flight>
+            {
+            new Flight(1, "OA-201", 101, 11,"Muscat", "Dubai","25-06-2026","10:30","11:45",55.000m,120,75,"Scheduled"),
+
+            new Flight(2, "OA-305", 102, 15,"Muscat", "Doha","26-06-2026","14:45","16:00",48.500m,95,75,"Scheduled"),
+
+            new Flight(3, "OA-410", 103, 18,"Salalah", "Abu Dhabi","27-06-2026","08:00","09:30", 60.000m,150,90,"Scheduled"),
+
+            new Flight(4, "OA-502", 104, 20, "Muscat", "Istanbul","28-06-2026","22:15","03:45",135.750m,80,330,"Departed"),
+
+            new Flight(5, "OA-620", 105, 22,"Sohar", "Cairo","29-06-2026","16:20","20:50",99.900m,0,270,"Cancelled")
+            },
+
             bookings = new List<Booking>(),
             pilots = new List<Pilot>(),
             passengers = new List<Passenger>()
-        };
+
+            };
 
         public static void RegisterPassenger(List<Passenger> passengers)
         {
@@ -164,22 +177,21 @@ namespace Flight_system_bsckEnd
 
             // Create a new flight object and add it to the flights list (flight record)
 
-            context.flights.Add(
-                new Flight
-                {
-                    flightId = flightId,
-                    flightCode = "OA-201",
-                    aircraftId = aircraftId,
-                    pilotId = pilotId,
-                    origin = "Oman",
-                    destination = "Dubai",
-                    departureDate = "2024-06-01",
-                    departureTime = "10:00 AM",
-                    arrivalTime = "12:00 PM",
-                    ticketPrice = 200.00m,
-                    availableSeats = totalSeats,
-                    status = "Scheduled"
-                });
+             var flights = new Flight(
+                      flightId,
+                      "OA-201",
+                      aircraftId,
+                      pilotId,
+                      "Oman",
+                      "Dubai",
+                      "2024-06-01",
+                      "10:00 AM",
+                      "12:00 PM",
+                      200.00m,
+                      totalSeats,
+                      120,
+                      "Scheduled"
+                    );
 
             Console.WriteLine($"Flight scheduled successfully , Assigned ID: {flightId}");
 
